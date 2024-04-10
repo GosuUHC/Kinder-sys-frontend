@@ -1,20 +1,17 @@
-import './App.css';
+import "./App.css";
+import Footer from "./view/components/footer/Footer";
+import Header from "./view/components/header/Header";
+import Sidebar from "./view/components/sidebar/Sidebar";
+import EducatorPage from "./view/pages/educator/EducatorPage";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+      <Sidebar />
+      <EducatorPage />
+      <Footer />
+    </>
   );
 }
 
