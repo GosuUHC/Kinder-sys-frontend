@@ -6,7 +6,7 @@ import {
   Button,
 } from "@material-tailwind/react";
 
-const RecCard = ({data}) => {
+const Recommendation = ({data}) => {
   return (
     <Card className="mt-6 w-96">
       <CardBody>
@@ -19,4 +19,4 @@ const RecCard = ({data}) => {
   );
 };
 
-export default RecCard;
+export default Recommendation;
