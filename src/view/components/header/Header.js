@@ -1,23 +1,6 @@
 import { Fragment, useState } from "react";
 import { Dialog, Disclosure, Popover, Transition } from "@headlessui/react";
-import {
-  ArrowPathIcon,
-  Bars3Icon,
-  ChartPieIcon,
-  CursorArrowRaysIcon,
-  FingerPrintIcon,
-  SquaresPlusIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
-import {
-  ChevronDownIcon,
-  PhoneIcon,
-  PlayCircleIcon,
-} from "@heroicons/react/20/solid";
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
