@@ -1,10 +1,23 @@
+import { useState } from "react";
 import RecommendationsList from "../../components/recommendationsList/RecommendationsList";
 import Table from "../../components/table/Table";
 import Selection from "../../components/selection/Selection";
 import { ChildrenForm } from "../../components/forms/ChildrenForm/ChildrenForm";
 import { Stats } from "../../components/stats/Stats";
+import { MyButton } from "../../components/button/MyButton";
+import { RecommendationForm } from "../../components/forms/RecommendationsFrom/RecommendationForm";
 
-const EducatorPage = () => {
+import s from './AnaliticPage.module.scss'
+
+const AnaliticPage = () => {
+  const [isActive, setIsActive] = useState(false);
+
+  const toggleActive = () => {
+    setIsActive(!isActive);
+  };
+
+  // const { diagnosticsData } = useDiagnostics();
+
   return (
     <>
       <div className="flex flex-col gap-1">
@@ -14,15 +27,13 @@ const EducatorPage = () => {
         <div className="ml-auto mr-auto flex flex-row gap-10">
           <div className="flex flex-col gap-2">
             <div className="py-3">
-              <Table />
-              <ChildrenForm group="группа 1" />
-            </div>
-            <div className="py-3">
               <Stats start_data={start_data} end_data={end_data} />
             </div>
           </div>
-          <div className="ml-auto mr-auto mt-2 flex-1">
+          <div className={`ml-auto mr-auto mt-2 flex-1 ${s.recommendation_container}`}>
             <RecommendationsList />
+            <MyButton text="Добавить рекомндацию" func={toggleActive}/>
+            <RecommendationForm isactive={isActive} toggleactive={toggleActive}/>
           </div>
         </div>
       </div>
@@ -62,4 +73,4 @@ const end_data = [
     procent: "90%",
   },
 ];
-export default EducatorPage;
+export default AnaliticPage;
