@@ -18,7 +18,6 @@ const Selection = () => {
 
   const { diagnosticsData } = useDiagnostics();
 
-  console.log(diagnosticsData);
 
   return (
     <div className={s.selection}>
