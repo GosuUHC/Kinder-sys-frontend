@@ -5,12 +5,12 @@ const TABLE_HEAD = ["№","ФИО", "Начало года", "Конец  год
 
 const TABLE_ROWS = [
   {
-    name: "Child 1",
+    name: "Имя Фамилия Отчество",
     start: "1",
     end: "2",
   },
   {
-    name: "Соболев Дмитрий Отчество",
+    name: "Имя Фамилия Отчество",
     start: "1",
     end: "2",
   },
@@ -36,6 +36,16 @@ const TABLE_ROWS = [
   },
   {
     name: "Child 7",
+    start: "1",
+    end: "2",
+  },
+  {
+    name: "Child 8",
+    start: "1",
+    end: "2",
+  },
+  {
+    name: "Child 9",
     start: "1",
     end: "2",
   },

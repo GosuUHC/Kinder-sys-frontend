@@ -2,6 +2,7 @@ import { useState } from "react";
 import { SelectionItem } from './selectionItem/SelectionItem'
 import { MyButton } from '../button/MyButton'
 import { GroupFrom } from "../forms/GroupForm/GroupFrom";
+import useDiagnostics from "../../../viewmodel/hooks/diagnostics/useDiagnostics";
 
 import s from './Selection.module.scss'
 
@@ -14,6 +15,10 @@ const Selection = () => {
   const toggleActive = () => {
     setIsActive(!isActive);
   };
+
+  const { diagnosticsData } = useDiagnostics();
+
+  console.log(diagnosticsData);
 
   return (
     <div className={s.selection}>

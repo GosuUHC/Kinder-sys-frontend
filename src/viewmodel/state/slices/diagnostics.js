@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const diagnosticsInitialState = {
   selectedCategory: {},
-  tableData: [],
+  selectedGroupId: 1,
 };
 
 const diagnostics = createSlice({
@@ -12,12 +12,12 @@ const diagnostics = createSlice({
     setSelectedCategory: (state, action) => {
       state.selectedCategory = action.selectedCategory;
     },
-    setTableData: (state, action) => {
-      state.tableData = action.tableData;
+    setSelectedGroupId: (state, action) => {
+      state.selectedGroupId = action.selectedGroupId;
     },
   },
 });
 
-export const { setSelectedCategory, setTableData } = diagnostics.actions;
+export const { setSelectedCategory, setSelectedGroupId } = diagnostics.actions;
 
 export const diagnosticsReducer = diagnostics.reducer;
