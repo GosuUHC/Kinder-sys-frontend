@@ -11,7 +11,7 @@ const EducatorPage = () => {
         <div className="ml-auto mr-auto mt-2 flex-1">
           <Selection />
         </div>
-        <div className="ml-auto mr-auto flex flex-row">
+        <div className="ml-auto mr-auto flex flex-row gap-10">
           <div className="flex flex-col gap-2">
             <div className="py-3">
               <Table />

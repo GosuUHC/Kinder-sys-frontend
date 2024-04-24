@@ -39,6 +39,16 @@ const TABLE_ROWS = [
     start: "1",
     end: "2",
   },
+  {
+    name: "Child 8",
+    start: "1",
+    end: "2",
+  },
+  {
+    name: "Child 9",
+    start: "1",
+    end: "2",
+  },
 ];
 
 const Table = () => {
