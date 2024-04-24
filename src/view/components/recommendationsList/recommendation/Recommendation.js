@@ -1,14 +1,12 @@
 import {
   Card,
   CardBody,
-  CardFooter,
   Typography,
-  Button,
 } from "@material-tailwind/react";
 
 const Recommendation = ({data}) => {
   return (
-    <Card className="mt-6 max-w-96">
+    <Card className="mt-6 w-256">
       <CardBody>
         <Typography variant="h5" color="blue-gray" className="mb-2">
           {data}
