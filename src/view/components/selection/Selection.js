@@ -4,8 +4,9 @@ import { MyButton } from '../button/MyButton'
 import { GroupFrom } from "../forms/GroupForm/GroupFrom";
 
 import s from './Selection.module.scss'
+import useDiagnostics from "../../../viewmodel/hooks/diagnostics/useDiagnostics";
 
-const GROUPS = ["Группа 1", "Группа 2", "Группа 3"]
+
 const CATEGORIES = ["Категория 1", "Категория 2", "Категория 3"]
 
 const Selection = () => {
@@ -15,9 +16,11 @@ const Selection = () => {
     setIsActive(!isActive);
   };
 
+  const { diagnosticsData } = useDiagnostics();
+
   return (
     <div className={s.selection}>
-      <SelectionItem label={"Группа"} data={GROUPS}/>
+      <SelectionItem label={"Группа"} data={diagnosticsData}/>
       <MyButton text="+" func={toggleActive}/>
       <GroupFrom isactive={isActive} toggleactive={toggleActive}/>
       <SelectionItem label={"Категория"} data={CATEGORIES}/>

@@ -3,7 +3,7 @@ import { api } from "./api";
 const educatorExtendedApi = api.injectEndpoints({
   endpoints: (build) => ({
     getDiagnostics: build.query({
-      query: (groupId) => `diagnostics/${groupId}`,
+      query: (groupId) => `diagnostics`,
     }),
     addDiagnosticsData: build.mutation({
       query: (data) => ({
@@ -22,4 +22,4 @@ const educatorExtendedApi = api.injectEndpoints({
   }),
 });
 
-export const { useGetDiagnosticsByGroup } = educatorExtendedApi;
+export const { useGetDiagnosticsQuery, useAddDiagnosticsDataMutation, useEditDiagnosticsDataMutation } = educatorExtendedApi;

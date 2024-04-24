@@ -1,28 +1,33 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
   setSelectedCategory,
-  setTableData,
+  setSelectedGroupId,
 } from "../../state/slices/diagnostics";
+import { useGetDiagnosticsQuery } from "../../../transport/diagnostics";
 
 const useDiagnostics = () => {
   const dispatch = useDispatch();
-  const { selectedCategory, tableData } = useSelector(
-    (state) => state.diagnostics,
-  );
+  const diagnostics = useSelector((state) => state.diagnostics);
+  const {
+    data: diagnosticsData = [],
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+  } = useGetDiagnosticsQuery(diagnostics.selectedGroupId);
 
   const handleSelectedCategoryChange = (category) => {
     dispatch(setSelectedCategory(category));
   };
 
-  const handleTableDataChange = (tableData) => {
-    dispatch(setTableData(tableData));
+  const handleSelectedGroupIdChange = (selectedGroupId) => {
+    dispatch(setSelectedGroupId(selectedGroupId));
   };
 
   return {
-    selectedCategory,
-    tableData,
+    diagnosticsData,
     handleSelectedCategoryChange,
-    handleTableDataChange,
+    handleSelectedGroupIdChange,
   };
 };
 
