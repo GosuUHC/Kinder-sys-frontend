@@ -10,7 +10,7 @@ function App() {
       <Header />
       <Sidebar />
       <EducatorPage />
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
