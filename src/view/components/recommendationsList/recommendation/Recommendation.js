@@ -13,7 +13,7 @@ const Recommendation = ({data}) => {
         <Typography variant="h5" color="blue-gray" className="mb-2">
           {data}
         </Typography>
-        <Typography>Recommendation to ..... .... ....</Typography>
+        <Typography>Рекомендуется сделать ...</Typography>
       </CardBody>
     </Card>
   );
