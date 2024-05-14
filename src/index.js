@@ -3,10 +3,11 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
-
-import { ThemeProvider } from "@material-tailwind/react";
 import { Provider } from "react-redux";
 import { store } from "./viewmodel/state/store";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

@@ -6,8 +6,9 @@ import reducers from "./reducers";
 export const store = configureStore({
   reducer: {
     diagnostics: reducers.diagnosticsReducer,
-    recommendation: reducers.recommendationReducer,
+    recommendations: reducers.recommendationsReducer,
     user: reducers.userReducer,
+    statistics: reducers.statisticsReducer,
     [api.reducerPath]: api.reducer,
   },
   middleware: (getDefaultMiddleware) =>
