@@ -1,14 +1,15 @@
-import { Fragment, useState } from "react";
-import { Dialog, Disclosure, Popover, Transition } from "@headlessui/react";
+import { useState } from "react";
+import { Dialog, Popover } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import HeaderButtons from "./HeaderButtons";
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="bg-white">
+    <header className="bg-gray-100">
       <nav
-        className="mx-auto flex  items-center justify-between p-6 lg:px-8"
+        className="mx-auto flex items-center justify-between p-6 lg:px-8"
         aria-label="Global"
       >
         <div className="flex lg:flex-1">
@@ -23,21 +24,12 @@ const Header = () => {
             className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
             onClick={() => setMobileMenuOpen(true)}
           >
-            <span className="sr-only">Open main menu</span>
+            <span className="sr-only">Открыть меню</span>
             <Bars3Icon className="h-6 w-6" aria-hidden="true" />
           </button>
         </div>
         <Popover.Group className="hidden lg:flex lg:gap-x-12">
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-            Главная
-          </a>
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-            Страница админа
-          </a>
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-            Страница аналитика
-          </a>
-    
+          <HeaderButtons />
         </Popover.Group>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
@@ -92,7 +84,6 @@ const Header = () => {
                 >
                   Страница аналитика
                 </a>
-                
               </div>
               <div className="py-6">
                 <a

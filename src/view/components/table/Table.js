@@ -1,67 +1,25 @@
 import { Card, Typography } from "@material-tailwind/react";
-import s from './Table.module.scss'
+import s from "./Table.module.scss";
+import useDiagnostics from "../../../viewmodel/hooks/diagnostics/useDiagnostics";
 
-const TABLE_HEAD = ["№","ФИО", "Начало года", "Конец  года"];
-
-const TABLE_ROWS = [
-  {
-    name: "Имя Фамилия Отчество",
-    start: "1",
-    end: "2",
-  },
-  {
-    name: "Имя Фамилия Отчество",
-    start: "1",
-    end: "2",
-  },
-  {
-    name: "Child 3",
-    start: "1",
-    end: "2",
-  },
-  {
-    name: "Child 4",
-    start: "1",
-    end: "2",
-  },
-  {
-    name: "Child 5",
-    start: "1",
-    end: "2",
-  },
-  {
-    name: "Child 6",
-    start: "1",
-    end: "2",
-  },
-  {
-    name: "Child 7",
-    start: "1",
-    end: "2",
-  },
-  {
-    name: "Child 8",
-    start: "1",
-    end: "2",
-  },
-  {
-    name: "Child 9",
-    start: "1",
-    end: "2",
-  },
-];
+const TABLE_HEAD = ["№", "ФИО", "Начало года", "Конец  года"];
 
 const Table = () => {
+  const { diagnosticsData } = useDiagnostics();
+
   return (
     <Card className={`h-full w-full overflow-y-auto ${s.table}`}>
-      <table className="w-full min-w-max table-auto text-left " >
-      <caption className="border-blue-gray-100 bg-blue-gray-100 border-b p-3"> Категория </caption>
+      <table className="w-full min-w-max table-auto text-left ">
+        <caption className="border-b border-blue-gray-100 bg-blue-gray-100 p-3">
+          {" "}
+          Категория{" "}
+        </caption>
         <thead>
           <tr>
             {TABLE_HEAD.map((head) => (
               <th
                 key={head}
-                className="border-blue-gray-100 bg-blue-gray-50 border-b p-4"
+                className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
               >
                 <Typography
                   variant="small"
@@ -75,13 +33,12 @@ const Table = () => {
           </tr>
         </thead>
         <tbody>
-          {TABLE_ROWS.map(({ name, start, end }, index) => {
-            const isLast = index === TABLE_ROWS.length - 1;
+          {diagnosticsData.map(({ childId, startScore, endScore }, index) => {
+            const isLast = index === diagnosticsData.length - 1;
             const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
 
             return (
-              <tr key={name} className="even:bg-blue-gray-50/50">
-                
+              <tr key={childId} className="even:bg-blue-gray-50/50">
                 <td className={classes}>
                   <Typography
                     variant="small"
@@ -97,7 +54,7 @@ const Table = () => {
                     color="blue-gray"
                     className="font-normal"
                   >
-                    {name}
+                    {childId}
                   </Typography>
                 </td>
                 <td className={classes}>
@@ -106,7 +63,7 @@ const Table = () => {
                     color="blue-gray"
                     className="font-normal"
                   >
-                    {start}
+                    {startScore}
                   </Typography>
                 </td>
                 <td className={classes}>
@@ -115,7 +72,7 @@ const Table = () => {
                     color="blue-gray"
                     className="font-normal"
                   >
-                    {end}
+                    {endScore}
                   </Typography>
                 </td>
               </tr>

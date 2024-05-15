@@ -1,9 +1,13 @@
 import { diagnosticsReducer } from "./slices/diagnostics";
-import { recommendationReducer } from "./slices/recommendation";
+import { recommendationsReducer } from "./slices/recommendations";
+import { statisticsReducer } from "./slices/statistics";
+import { userReducer } from "./slices/user";
 
 const reducers = {
   diagnosticsReducer,
-  recommendationReducer,
+  recommendationsReducer,
+  userReducer,
+  statisticsReducer,
 };
 
 export default reducers;

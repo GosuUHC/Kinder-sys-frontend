@@ -1,20 +1,32 @@
-import { useMemo } from "react";
+import useRecommendations from "../../../viewmodel/hooks/recommendations/useRecommendations";
 import Recommendation from "./recommendation/Recommendation";
 
-import s from './RecommendationList.module.scss'
+import s from "./RecommendationList.module.scss";
 
 const RecommendationsList = () => {
-  const recs = ["recommendation1", "recommendation2", "recommendation3"];
+  const { recommendationsData } = useRecommendations();
 
   return (
     <div className={s.recommendations_list}>
-      <Recommendation data={recs[0]} />
-      <Recommendation data={recs[1]} />
-      <Recommendation data={recs[2]} />
-      <Recommendation data={recs[2]} />
-      <Recommendation data={recs[2]} />
-      <Recommendation data={recs[2]} />
-      <Recommendation data={recs[2]} />
+      {recommendationsData.map(
+        (
+          {
+            category,
+            highScoreRecommendation,
+            middleScoreRecommendation,
+            lowScoreRecommendation,
+          },
+          index,
+        ) => (
+          <Recommendation
+            key={index}
+            category={category.name}
+            high={highScoreRecommendation}
+            mid={middleScoreRecommendation}
+            low={lowScoreRecommendation}
+          />
+        ),
+      )}
     </div>
   );
 };

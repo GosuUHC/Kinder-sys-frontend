@@ -1,23 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const diagnosticsInitialState = {
-  selectedCategory: {},
-  selectedGroupId: 1,
+  groupId: 1,
+  diagnosticsList: [],
 };
 
 const diagnostics = createSlice({
-  name: "educator",
+  name: "diagnostics",
   initialState: diagnosticsInitialState,
   reducers: {
-    setSelectedCategory: (state, action) => {
-      state.selectedCategory = action.selectedCategory;
+    setGroupId: (state, action) => {
+      state.groupId = action.payload;
     },
-    setSelectedGroupId: (state, action) => {
-      state.selectedGroupId = action.selectedGroupId;
+    updateDiagnosticsList: (state, action) => {
+      state.diagnosticsList = action.payload;
     },
   },
 });
 
-export const { setSelectedCategory, setSelectedGroupId } = diagnostics.actions;
+export const { setGroupId, updateDiagnosticsList } = diagnostics.actions;
 
 export const diagnosticsReducer = diagnostics.reducer;
