@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
   useAddRecommendationMutation,
+  useDeleteRecommendationMutation,
   useGetRecommendationsByCategoryIdQuery,
   useGetRecommendationsByGroupIdQuery,
 } from "../../../transport/recommendations";
@@ -18,6 +19,8 @@ const useRecommendations = () => {
   );
 
   const [addRecommendation] = useAddRecommendationMutation();
+
+  const [deleteRecommendation] = useDeleteRecommendationMutation();
 
   const { data: recommendationsData = [] } =
     useGetRecommendationsByCategoryIdQuery(categoryId);
@@ -38,11 +41,16 @@ const useRecommendations = () => {
     await addRecommendation(recData);
   };
 
+  const handleDeleteRecommendation = async (recId) => {
+    await deleteRecommendation({ id: recId });
+  };
+
   return {
     handleCategoryIdChange,
     handleGroupIdChange,
     handleRecommendationTextChange,
     handleAddRecommendation,
+    handleDeleteRecommendation,
     recommendationsData,
     categoryId,
     groupId,
