@@ -8,11 +8,16 @@ const useStatistics = () => {
   const { data: statisticsData = [], isSuccess } =
     useGetStatisticsByGroupIdAndYearQuery({ groupId, year });
 
+
+  console.log(statisticsData);
+
   const handleGroupIdChange = (groupId) => {
+    console.log(groupId);
     dispatch(setGroupId(groupId));
   };
 
   const handleYearChange = (year) => {
+    console.log(year);
     dispatch(setYear(year));
   };
 

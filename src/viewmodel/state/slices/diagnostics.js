@@ -2,7 +2,16 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const diagnosticsInitialState = {
   groupId: 1,
-  diagnosticsList: [],
+  categoryId: 1,
+  year: 2023,
+  newDiagnostics: {
+    categoryId: -1,
+    childId: -1,
+    childGroupId: -1,
+    startScore: -1,
+    endScore: -1,
+    year: -2024,
+  },
 };
 
 const diagnostics = createSlice({
@@ -12,12 +21,19 @@ const diagnostics = createSlice({
     setGroupId: (state, action) => {
       state.groupId = action.payload;
     },
-    updateDiagnosticsList: (state, action) => {
-      state.diagnosticsList = action.payload;
+    setCategoryId: (state, action) => {
+      state.categoryId = action.payload;
+    },
+    setYear: (state, action) => {
+      state.year = action.payload;
+    },
+    setNewDiagnostics: (state, action) => {
+      state.newDiagnostics = action.payload;
     },
   },
 });
 
-export const { setGroupId, updateDiagnosticsList } = diagnostics.actions;
+export const { setGroupId, setCategoryId, setYear, setNewDiagnostics } =
+  diagnostics.actions;
 
 export const diagnosticsReducer = diagnostics.reducer;

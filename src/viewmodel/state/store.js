@@ -7,8 +7,8 @@ export const store = configureStore({
   reducer: {
     diagnostics: reducers.diagnosticsReducer,
     recommendations: reducers.recommendationsReducer,
-    user: reducers.userReducer,
     statistics: reducers.statisticsReducer,
+    auth: reducers.authReducer,
     [api.reducerPath]: api.reducer,
   },
   middleware: (getDefaultMiddleware) =>

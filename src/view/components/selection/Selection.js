@@ -1,14 +1,16 @@
 import { useState } from "react";
-import { SelectionItem } from "./selectionItem/SelectionItem";
-import { MyButton } from "../button/MyButton";
 import { GroupFrom } from "../forms/GroupForm/GroupFrom";
 import useDiagnostics from "../../../viewmodel/hooks/diagnostics/useDiagnostics";
 
 import s from "./Selection.module.scss";
-import useUser from "../../../viewmodel/hooks/users/useUsers";
-
-const GROUPS = ["Группа 1", "Группа 2", "Группа 3"];
-const CATEGORIES = ["Категория 1", "Категория 2", "Категория 3"];
+import useGroups from "../../../viewmodel/hooks/groups/useGroups";
+import useCategories from "../../../viewmodel/hooks/categories/useCategories";
+import SelectionCategoryItem from "./selectionItem/SelectionCategoryItem";
+import SelectionGroupItem from "./selectionItem/SelectionGroupItem";
+import SelectionYearItem from "./selectionItem/SelectionYearItem";
+import useStatistics from "../../../viewmodel/hooks/statistics/useStatistics";
+import useRecommendations from "../../../viewmodel/hooks/recommendations/useRecommendations";
+import useAuth from "../../../viewmodel/hooks/auth/useAuth";
 
 const Selection = () => {
   const [isActive, setIsActive] = useState(false);
@@ -17,17 +19,60 @@ const Selection = () => {
     setIsActive(!isActive);
   };
 
-  // const { diagnosticsData } = useDiagnostics();
+  const years = [2022, 2023, 2024];
+  const {
+    groupId,
+    categoryId,
+    year,
+    handleGroupIdChange,
+    handleCategoryIdChange,
+    handleYearChange,
+  } = useDiagnostics();
 
-  const { role } = useUser();
+  const {
+    handleYearChange: handleYearChangeStatistics,
+    handleGroupIdChange: handleGroupIdChangeStatistics,
+  } = useStatistics();
+
+  const { role } = useAuth();
+
+  const { handleCategoryIdChange: handleCategoryIdChangeRecs } =
+    useRecommendations();
+
+  const { groupsData, isSuccessGroups } = useGroups();
+
+  const { categoriesData, isSuccessCategories } = useCategories();
+
+  const onChangeGroup = (id) => {
+    handleGroupIdChange(id);
+    handleGroupIdChangeStatistics(id);
+  };
+
+  const onChangeYear = (y) => {
+    handleYearChange(y);
+    handleYearChangeStatistics(y);
+  };
+
+  const onChangeCategory = (c) => {
+    handleCategoryIdChange(c);
+    handleCategoryIdChangeRecs(c);
+  };
 
   return (
     <div className={s.selection}>
-      <SelectionItem label={"Группа"} data={GROUPS} />
-      {role === "admin" && <MyButton text="+" func={toggleActive} />}
-      <GroupFrom isactive={isActive} toggleactive={toggleActive} />
-      <SelectionItem label={"Категория"} data={CATEGORIES} />
-      {role === "admin" && <MyButton text="+" func={toggleActive} />}
+      {role === "educator" && (
+        <SelectionGroupItem
+          label={"Группа"}
+          data={groupsData}
+          onChange={onChangeGroup}
+        />
+      )}
+      <SelectionCategoryItem
+        label={"Категория"}
+        data={categoriesData}
+        onChange={onChangeCategory}
+      />
+      <SelectionYearItem label={"Год"} data={years} onChange={onChangeYear} />
     </div>
   );
 };

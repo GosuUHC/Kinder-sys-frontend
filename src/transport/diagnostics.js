@@ -5,6 +5,10 @@ const diagnosticsExtendedApi = api.injectEndpoints({
     getDiagnosticsByGroupId: build.query({
       query: (groupId) => `diagnostics/${groupId}`,
     }),
+    getDiagnosticsByGroupIdAndCategoryIdAndYear: build.query({
+      query: (data) =>
+        `diagnostics/groups/${data.groupId}/categories/${data.categoryId}/years/${data.year}`,
+    }),
     addDiagnosticsData: build.mutation({
       query: (data) => ({
         url: "/diagnostics",
@@ -17,5 +21,6 @@ const diagnosticsExtendedApi = api.injectEndpoints({
 
 export const {
   useGetDiagnosticsByGroupIdQuery,
+  useGetDiagnosticsByGroupIdAndCategoryIdAndYearQuery,
   useAddDiagnosticsDataMutation,
 } = diagnosticsExtendedApi;

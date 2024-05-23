@@ -1,13 +1,26 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useGetRecommendationsByGroupIdQuery } from "../../../transport/recommendations";
-import { setCategoryId, setGroupId } from "../../state/slices/recommendations";
+import {
+  useAddRecommendationMutation,
+  useGetRecommendationsByCategoryIdQuery,
+  useGetRecommendationsByGroupIdQuery,
+} from "../../../transport/recommendations";
+import {
+  setCategoryId,
+  setGroupId,
+  setRecommendationText,
+} from "../../state/slices/recommendations";
 
 const useRecommendations = () => {
   const dispatch = useDispatch();
 
-  const { categoryId, groupId } = useSelector((state) => state.recommendations);
+  const { categoryId, groupId, recommendationText } = useSelector(
+    (state) => state.recommendations,
+  );
+
+  const [addRecommendation] = useAddRecommendationMutation();
+
   const { data: recommendationsData = [] } =
-    useGetRecommendationsByGroupIdQuery(groupId);
+    useGetRecommendationsByCategoryIdQuery(categoryId);
 
   const handleCategoryIdChange = (categoryId) => {
     dispatch(setCategoryId(categoryId));
@@ -17,12 +30,23 @@ const useRecommendations = () => {
     dispatch(setGroupId(groupId));
   };
 
+  const handleRecommendationTextChange = (recommendationText) => {
+    dispatch(setRecommendationText(recommendationText));
+  };
+
+  const handleAddRecommendation = async (recData) => {
+    await addRecommendation(recData);
+  };
+
   return {
     handleCategoryIdChange,
     handleGroupIdChange,
+    handleRecommendationTextChange,
+    handleAddRecommendation,
     recommendationsData,
     categoryId,
     groupId,
+    recommendationText,
   };
 };
 

@@ -1,7 +1,7 @@
 const PATH = {
-  main: "/",
+  main: "/main",
   analytics: "/analytics",
-  auth: "/auth",
+  auth: "/",
 };
 
 export { PATH };
