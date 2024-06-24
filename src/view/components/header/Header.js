@@ -2,9 +2,28 @@ import { useState } from "react";
 import { Dialog, Popover } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import HeaderButtons from "./HeaderButtons";
+import useAuth from "../../../viewmodel/hooks/auth/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const { handleUserLogout } = useAuth();
+
+  const navigate = useNavigate();
+
+  const logoutUser = () => {
+    handleUserLogout();
+    navigate("/");
+  };
+
+  const onClickMain = () => {
+    navigate("/main");
+  };
+
+  if (!localStorage.getItem("role")) {
+    return <></>;
+  }
 
   return (
     <header className="bg-gray-100">
@@ -32,7 +51,11 @@ const Header = () => {
           <HeaderButtons />
         </Popover.Group>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+          <a
+            onClick={logoutUser}
+            href="#"
+            className="text-sm font-semibold leading-6 text-gray-900"
+          >
             Выход <span aria-hidden="true">&rarr;</span>
           </a>
         </div>
@@ -67,17 +90,18 @@ const Header = () => {
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
                 <a
+                  onClick={onClickMain}
                   href="#"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Главная
                 </a>
-                <a
+                {/* <a
                   href="#"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Страница админа
-                </a>
+                </a> */}
                 <a
                   href="#"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
@@ -87,6 +111,7 @@ const Header = () => {
               </div>
               <div className="py-6">
                 <a
+                  onClick={logoutUser}
                   href="#"
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >

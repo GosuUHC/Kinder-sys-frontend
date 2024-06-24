@@ -2,9 +2,16 @@ import { Card } from "@material-tailwind/react";
 import s from "./Stats.module.scss";
 import useStatistics from "../../../viewmodel/hooks/statistics/useStatistics";
 import Diagramm from "../diagramm/Diagramm";
+import useDiagnostics from "../../../viewmodel/hooks/diagnostics/useDiagnostics";
 
 export const Stats = () => {
-  const { statisticsData, isSuccess } = useStatistics();
+  const { statisticsData, year, groupId, isSuccess } = useStatistics();
+
+  const { diagnosticsData } = useDiagnostics();
+
+  if (diagnosticsData.length === 0) {
+    return <></>;
+  }
 
   if (!isSuccess) return null;
 

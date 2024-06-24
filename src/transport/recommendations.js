@@ -18,8 +18,11 @@ const recommendationExtendedApi = api.injectEndpoints({
         body: data,
       }),
     }),
-    deleteRecommendation: build.query({
-      query: (recommendationId) => `recommendations/${recommendationId}`,
+    deleteRecommendation: build.mutation({
+      query: (data) => ({
+        url: `recommendations/${data.id}`,
+        method: "DELETE",
+      }),
     }),
   }),
 });
@@ -29,5 +32,5 @@ export const {
   useGetRecommendationsByCategoryIdQuery,
   useGetRecommendationsByGroupIdQuery,
   useAddRecommendationMutation,
-  useDeleteRecommendationQuery,
+  useDeleteRecommendationMutation,
 } = recommendationExtendedApi;

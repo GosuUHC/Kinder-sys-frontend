@@ -2,6 +2,10 @@ import { Suspense, lazy } from "react";
 import { useRoutes } from "react-router-dom";
 import { PATH } from "./consts";
 
+const LoginPage = lazy(() =>
+  import("./view/pages/login/Login").then((comp) => comp),
+);
+
 const MainPage = lazy(() =>
   import("./view/pages/main/MainPage").then((comp) => comp),
 );
@@ -12,6 +16,14 @@ const AnalyticsPage = lazy(() =>
 
 const Router = () => {
   return useRoutes([
+    {
+      element: (
+        <Suspense>
+          <LoginPage />
+        </Suspense>
+      ),
+      path: PATH.auth,
+    },
     {
       element: (
         <Suspense>
