@@ -4,11 +4,12 @@ import {
   setGroupId,
   setNewDiagnostics,
   setYear,
-  updateDiagnosticsList,
 } from "../../state/slices/diagnostics";
 import {
   useAddDiagnosticsDataMutation,
+  useDeleteDiagnosticsDataMutation,
   useGetDiagnosticsByGroupIdAndCategoryIdAndYearQuery,
+  useGetDiagnosticsByGroupIdAndYearQuery,
 } from "../../../transport/diagnostics";
 
 const useDiagnostics = () => {
@@ -23,7 +24,15 @@ const useDiagnostics = () => {
       year,
     });
 
+  const { data: diagnosticsDataByGroupAndYear = [] } =
+    useGetDiagnosticsByGroupIdAndYearQuery({
+      groupId,
+      year,
+    });
+
   const [addDiagnostics] = useAddDiagnosticsDataMutation();
+
+  const [deleteDiagnostitcs] = useDeleteDiagnosticsDataMutation();
 
   const handleGroupIdChange = (groupId) => {
     dispatch(setGroupId(groupId));
@@ -42,12 +51,18 @@ const useDiagnostics = () => {
     addDiagnostics(newDiagnostics);
   };
 
+  const handleDelete = (diagnosticsId) => {
+    deleteDiagnostitcs(diagnosticsId);
+  };
+
   return {
     handleGroupIdChange,
     handleCategoryIdChange,
     handleYearChange,
     handleAddDiagnostics,
+    handleDelete,
     diagnosticsData,
+    diagnosticsDataByGroupAndYear,
     groupId,
     categoryId,
     year,

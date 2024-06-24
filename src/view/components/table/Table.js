@@ -1,15 +1,23 @@
-import { Card, Typography, Button } from "@material-tailwind/react";
+import { Card, Typography } from "@material-tailwind/react";
 import { useState } from "react";
 import s from "./Table.module.scss";
 import useDiagnostics from "../../../viewmodel/hooks/diagnostics/useDiagnostics";
 import useAuth from "../../../viewmodel/hooks/auth/useAuth";
 import DiagnosticsForm from "../forms/diagnostics/DiagnosticsForm";
 import { MyButton } from "../button/MyButton";
+import useGroups from "../../../viewmodel/hooks/groups/useGroups";
+import ChildData from "./childData/ChildData";
 
 const TABLE_HEAD = ["№", "ФИО", "Начало года", "Конец  года"];
-
 const Table = () => {
-  const { diagnosticsData, handleAddDiagnostics } = useDiagnostics();
+  const { diagnosticsData, groupId, handleAddDiagnostics, handleDelete } =
+    useDiagnostics();
+  const { groupsData } = useGroups();
+
+  const filteredGroupsData = groupsData.filter(
+    (group) => group.id === groupId,
+  )[0];
+
   const { role } = useAuth();
   const [isFormActive, setIsFormActive] = useState(false);
 
@@ -45,53 +53,70 @@ const Table = () => {
             </tr>
           </thead>
           <tbody>
-            {diagnosticsData.map(({ childId, startScore, endScore }, index) => {
-              const isLast = index === diagnosticsData.length - 1;
-              const classes = isLast
-                ? "p-4"
-                : "p-4 border-b border-blue-gray-50";
+            {diagnosticsData.map(
+              ({ id: diagId, childId, startScore, endScore }, index) => {
+                const isLast = index === diagnosticsData.length - 1;
+                const classes = isLast
+                  ? "p-4"
+                  : "p-4 border-b border-blue-gray-50";
 
-              return (
-                <tr key={childId} className="even:bg-blue-gray-50/50">
-                  <td className={classes}>
-                    <Typography
-                      variant="small"
-                      color="blue-gray"
-                      className="font-normal"
-                    >
-                      {`#${index + 1}`}
-                    </Typography>
-                  </td>
-                  <td className={classes}>
-                    <Typography
-                      variant="small"
-                      color="blue-gray"
-                      className="font-normal"
-                    >
-                      {childId}
-                    </Typography>
-                  </td>
-                  <td className={classes}>
-                    <Typography
-                      variant="small"
-                      color="blue-gray"
-                      className="font-normal"
-                    >
-                      {startScore}
-                    </Typography>
-                  </td>
-                  <td className={classes}>
-                    <Typography
-                      variant="small"
-                      color="blue-gray"
-                      className="font-normal"
-                    >
-                      {endScore}
-                    </Typography>
-                  </td>
-                </tr>
-              );
-            })}
+                return (
+                  <tr key={childId} className="even:bg-blue-gray-50/50">
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {`#${index + 1}`}
+                      </Typography>
+                    </td>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        <ChildData
+                          data={
+                            filteredGroupsData.children.filter(
+                              (child) => child.id === childId,
+                            )[0]
+                          }
+                        />
+                      </Typography>
+                    </td>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {startScore}
+                      </Typography>
+                    </td>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {endScore}
+                      </Typography>
+                    </td>
+                    {/* <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        <DeleteButton onDelete={ />
+                      </Typography>
+                    </td> */}
+                  </tr>
+                );
+              },
+            )}
           </tbody>
         </table>
         <MyButton text={"+"} func={toggleForm}></MyButton>

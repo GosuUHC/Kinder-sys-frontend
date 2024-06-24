@@ -11,6 +11,8 @@ import SelectionYearItem from "./selectionItem/SelectionYearItem";
 import useStatistics from "../../../viewmodel/hooks/statistics/useStatistics";
 import useRecommendations from "../../../viewmodel/hooks/recommendations/useRecommendations";
 import useAuth from "../../../viewmodel/hooks/auth/useAuth";
+import { MyButton } from "../button/MyButton";
+import { Button } from "@material-tailwind/react";
 
 const Selection = () => {
   const [isActive, setIsActive] = useState(false);
@@ -31,10 +33,11 @@ const Selection = () => {
 
   const {
     handleYearChange: handleYearChangeStatistics,
+    handleCategoryIdChange: handleCategoryIdChangeStatistics,
     handleGroupIdChange: handleGroupIdChangeStatistics,
   } = useStatistics();
 
-  const { role } = useAuth();
+  const role = localStorage.getItem("role");
 
   const { handleCategoryIdChange: handleCategoryIdChangeRecs } =
     useRecommendations();
@@ -56,6 +59,7 @@ const Selection = () => {
   const onChangeCategory = (c) => {
     handleCategoryIdChange(c);
     handleCategoryIdChangeRecs(c);
+    handleCategoryIdChangeStatistics(c);
   };
 
   return (
@@ -72,6 +76,9 @@ const Selection = () => {
         data={categoriesData}
         onChange={onChangeCategory}
       />
+      {role === "educator" && (
+        <Button size="sm" className="rounded-full">+</Button>
+      )}
       <SelectionYearItem label={"Год"} data={years} onChange={onChangeYear} />
     </div>
   );

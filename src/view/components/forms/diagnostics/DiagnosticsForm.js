@@ -12,11 +12,13 @@ import useDiagnostics from "../../../../viewmodel/hooks/diagnostics/useDiagnosti
 import useCategories from "../../../../viewmodel/hooks/categories/useCategories";
 import useGroups from "../../../../viewmodel/hooks/groups/useGroups";
 import SelectionCategoryItem from "../../selection/selectionItem/SelectionCategoryItem";
+import SelectionChildItem from "../../selection/selectionItem/SelectionChildItem";
+import SelectionGroupItem from "../../selection/selectionItem/SelectionGroupItem";
 
 const DiagnosticsForm = ({ isActive, toggleActive }) => {
   const [categoryId, setCategoryId] = useState(-1);
   const [childId, setChildId] = useState(-1);
-  const [childGroupId, setChildGroupId] = useState(-1);
+  const [childGroupId, setChildGroupId] = useState(1);
   const [startScore, setStartScore] = useState("");
   const [endScore, setEndScore] = useState("");
   const [year, setYear] = useState("");
@@ -39,6 +41,8 @@ const DiagnosticsForm = ({ isActive, toggleActive }) => {
   const { categoriesData } = useCategories();
 
   const { groupsData } = useGroups();
+
+  console.log(groupsData);
 
   return (
     <div>
@@ -64,23 +68,17 @@ const DiagnosticsForm = ({ isActive, toggleActive }) => {
               data={categoriesData}
               onChange={(id) => setCategoryId(id)}
             />
-
-            <Input
-              size="lg"
-              label="ID Ребёнка"
-              type="number"
-              value={childId}
-              onChange={(e) => setChildId(parseInt(e.target.value))}
-              required
+            <SelectionGroupItem
+              label={"Группа"}
+              data={groupsData}
+              onChange={(id) => setChildGroupId(id)}
             />
-            <Input
-              size="lg"
-              label="ID Группы"
-              type="number"
-              value={childGroupId}
-              onChange={(e) => setChildGroupId(parseInt(e.target.value))}
-              required
+            <SelectionChildItem
+              label={"Ребенок"}
+              data={groupsData.filter((group) => group.id == childGroupId)[0].children}
+              onChange={(id) => setChildId(id)}
             />
+            
             <Input
               size="lg"
               label="Начало года"

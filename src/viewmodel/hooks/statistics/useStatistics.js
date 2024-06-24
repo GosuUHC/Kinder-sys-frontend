@@ -1,32 +1,39 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useGetStatisticsByGroupIdAndYearQuery } from "../../../transport/statistics";
-import { setGroupId, setYear } from "../../state/slices/statistics";
+import {
+  setCategoryId,
+  setGroupId,
+  setYear,
+} from "../../state/slices/statistics";
 
 const useStatistics = () => {
   const dispatch = useDispatch();
-  const { groupId, year } = useSelector((state) => state.statistics);
+  const { groupId, categoryId, year } = useSelector(
+    (state) => state.statistics,
+  );
   const { data: statisticsData = [], isSuccess } =
-    useGetStatisticsByGroupIdAndYearQuery({ groupId, year });
-
-
-  console.log(statisticsData);
+    useGetStatisticsByGroupIdAndYearQuery({ groupId, categoryId, year });
 
   const handleGroupIdChange = (groupId) => {
-    console.log(groupId);
     dispatch(setGroupId(groupId));
   };
 
+  const handleCategoryIdChange = (categoryId) => {
+    dispatch(setCategoryId(categoryId));
+  };
+
   const handleYearChange = (year) => {
-    console.log(year);
     dispatch(setYear(year));
   };
 
   return {
     handleGroupIdChange,
     handleYearChange,
+    handleCategoryIdChange,
     statisticsData,
     isSuccess,
     groupId,
+    categoryId,
     year,
   };
 };

@@ -20,7 +20,7 @@ const AnalyticsPage = () => {
     <>
       <div className="flex flex-col gap-1">
         <div className="ml-auto mr-auto mt-2 flex-1">
-          {/* <Selection /> */}
+          <Selection />
         </div>
         <div className="ml-auto mr-auto flex flex-row gap-10">
           <div className="flex flex-col gap-2">

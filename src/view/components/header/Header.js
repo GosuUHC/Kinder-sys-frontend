@@ -6,8 +6,6 @@ import useAuth from "../../../viewmodel/hooks/auth/useAuth";
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {
-  
-
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const { handleUserLogout } = useAuth();
@@ -21,12 +19,11 @@ const Header = () => {
 
   const onClickMain = () => {
     navigate("/main");
-  }
+  };
 
   if (!localStorage.getItem("role")) {
     return <></>;
   }
-
 
   return (
     <header className="bg-gray-100">
